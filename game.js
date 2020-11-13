@@ -1,6 +1,7 @@
 ﻿var cardTally = 3;
 var dealerScore = 0;
 var playerScore = 0;
+var hasWon = false;
 
 function Card() {
     this.cardNum = randomInteger(1, 13);
@@ -104,19 +105,16 @@ function completeDealerHand() {
     }
     updateScore();
     if (playerScore > dealerScore) {
-        player.appendChild(mark);
-        var styleStr = "background-color:#4CAF50;";
-        mark.setAttribute("style", styleStr);
-        mark.innerHTML += " Player has won the hand! ";
+        hasWon = true;
+        updateScore();
         disableButtons();
     }
 
     if (dealerScore > playerScore) {
+        var player = document.getElementById("playerScore");
         player.innerHTML += " Player has lost the hand! ";
         disableButtons();
-
     }
-
 }
 
 function updateScore() {
@@ -128,6 +126,10 @@ function updateScore() {
     dealer.innerHTML = dealerScore;
 
     if (playerScore == 21 || dealerScore > 21) {
+        hasWon = true;
+    }
+    
+    if (hasWon) {
         player.appendChild(mark);
         var styleStr = "background-color:#4CAF50;";
         mark.setAttribute("style", styleStr);
