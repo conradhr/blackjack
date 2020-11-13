@@ -108,9 +108,7 @@ function completeDealerHand() {
         hasWon = true;
         updateScore();
         disableButtons();
-    }
-
-    if (dealerScore > playerScore) {
+    } else {
         var player = document.getElementById("playerScore");
         player.innerHTML += " Player has lost the hand! ";
         disableButtons();
